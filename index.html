@@ -17,11 +17,11 @@
           <div class="profile-card__photo">
             <img src="assets/images/me.jpeg" alt="John David A. Calimpong" />
             <div class="profile-card__photo-overlay hover-effect">
-              <span class="profile-card__photo-text">Aspiring Developer</span>
+              <span class="profile-card__photo-text">Hello World!</span>
             </div>
           </div>
           <div class="profile-card__info">
-            <div class="profile-card__top-row">
+            <div class="profile-card__name-row">
               <h1>John David A. Calimpong</h1>
               <button
                 class="theme-toggle"
@@ -29,11 +29,13 @@
                 aria-label="Toggle dark mode"
                 data-theme-toggle
               >
-                <span class="theme-toggle__label theme-toggle__label--light">Light</span>
-                <span class="theme-toggle__label theme-toggle__label--dark">Dark</span>
-                <span class="theme-toggle__thumb"></span>
+                <span class="theme-toggle__thumb">
+                  <img src="assets/icons/light.png" alt="Light mode" class="theme-toggle__icon theme-toggle__icon--light" />
+                  <img src="assets/icons/dark.png" alt="Dark mode" class="theme-toggle__icon theme-toggle__icon--dark" />
+                </span>
               </button>
             </div>
+            <div class="profile-card__subtitle">Aspiring Developer</div>
 
             <div class="profile-card__contact">
               <p>
@@ -46,19 +48,6 @@
                   data-dark-src="assets/icons/white/phone2.png"
                 />
                 +63 956-279-0038
-              </p>
-              <p>
-                <img
-                  class="icon icon--inline"
-                  src="assets/icons/black/email.png"
-                  alt=""
-                  data-theme-icon
-                  data-light-src="assets/icons/black/email.png"
-                  data-dark-src="assets/icons/white/email2.png"
-                />
-                <a href="mailto:johndavid.calimpong@gmail.com"
-                  >johndavid.calimpong@gmail.com</a
-                >
               </p>
               <p>
                 <img
@@ -98,16 +87,16 @@
                   />
                   LinkedIn
                 </a>
-                <a href="https://www.facebook.com/johncalimps" class="btn-chip">
+                <a href="mailto:johndavid.calimpong@gmail.com" class="btn-chip">
                   <img
                     class="icon icon--small"
-                    src="assets/icons/black/facebook.png"
+                    src="assets/icons/black/email.png"
                     alt=""
                     data-theme-icon
-                    data-light-src="assets/icons/black/facebook.png"
-                    data-dark-src="assets/icons/white/facebook2.png"
+                    data-light-src="assets/icons/black/email.png"
+                    data-dark-src="assets/icons/white/email2.png"
                   />
-                  Facebook
+                  Email
                 </a>
                 <a href="https://drive.google.com/file/d/1gOuJgk-U2qMsR-nEdtOxHWzBdDydntI-/view?usp=sharing" class="btn-chip">
                   <img
@@ -236,7 +225,29 @@
             </h2>
           </div>
 
-          <div class="projects-layout">
+          <div class="projects-layout" data-projects-carousel>
+            <button
+              class="projects-nav projects-nav--prev"
+              type="button"
+              aria-label="Previous project"
+              data-projects-prev
+            >
+              <img
+                class="icon icon--small"
+                src="assets/icons/black/left.png"
+                alt=""
+                data-theme-icon
+                data-light-src="assets/icons/black/left.png"
+                data-dark-src="assets/icons/white/left2.png"
+              />
+            </button>
+
+            <article class="project-details">
+              <div class="project-details__header">
+                <h3>CapstoneConnect — Team Formation with AI</h3>
+              </div>
+            </article>
+
             <figure class="project-preview">
               <img
                 src="assets/images/capstoneconnect.JPG"
@@ -244,22 +255,72 @@
               />
             </figure>
 
-            <article class="project-details">
-              <div class="project-details__header">
-                <h3>CapstoneConnect</h3>
-              </div>
-              <p>
-                A smart system that uses AI to put students into capstone project teams. It pairs
-                them based on technical skills, project interests, and compatibility. It finds good
-                matches by understanding the meaning of their information and gives automatic team
-                ideas.
-              </p>
-              <button class="btn-primary" type="button">View More</button>
-            </article>
+            <div class="project-details__cta-wrapper">
+              <button class="btn-primary project-details__cta" type="button" data-view-more>
+                View More
+              </button>
+            </div>
+
+            <button
+              class="projects-nav projects-nav--next"
+              type="button"
+              aria-label="Next project"
+              data-projects-next
+            >
+              <img
+                class="icon icon--small"
+                src="assets/icons/black/arrow.png"
+                alt=""
+                data-theme-icon
+                data-light-src="assets/icons/black/arrow.png"
+                data-dark-src="assets/icons/white/arrow2.png"
+              />
+            </button>
+          </div>
+
+          <div class="projects-dots" role="tablist" aria-label="Project slides">
+            <button
+              class="projects-dot is-active"
+              type="button"
+              aria-label="Show project 1"
+              data-project-dot="0"
+            ></button>
+            <button
+              class="projects-dot"
+              type="button"
+              aria-label="Show project 2"
+              data-project-dot="1"
+            ></button>
+            <button
+              class="projects-dot"
+              type="button"
+              aria-label="Show project 3"
+              data-project-dot="2"
+            ></button>
           </div>
         </div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <p>© 2025 John David. All rights reserved.</p>
+    </footer>
+
+    <button
+      class="back-to-top"
+      type="button"
+      aria-label="Back to top"
+      data-back-to-top
+    >
+      <img
+        class="icon"
+        src="assets/icons/black/up.png"
+        alt=""
+        data-theme-icon
+        data-light-src="assets/icons/black/up.png"
+        data-dark-src="assets/icons/black/up.png"
+      />
+    </button>
 
     <script src="scripts/main.js"></script>
   </body>
