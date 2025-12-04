@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title: "FitTrack — Social Gym & Workout Logger",
         description:
           "A reserved slot for a future project. Once the project is ready, this area will showcase its overview, goals, and key features.",
-        image: "assets/images/capstoneconnect.JPG",
+        image: "assets/images/fittrack.JPG",
         alt: "Upcoming project placeholder preview",
         href: "#",
         cta: "View Project Details",
@@ -101,17 +101,36 @@ document.addEventListener("DOMContentLoaded", () => {
       const project = projects[index];
       if (!project) return;
 
-      previewImg.src = project.image;
-      previewImg.alt = project.alt;
-      titleEl.textContent = project.title;
-      ctaBtn.textContent = project.cta;
-      ctaBtn.disabled = project.href === "#";
+      // Add fade-out animation
+      previewImg.classList.add("fade-out");
+      titleEl.classList.add("fade-out");
 
-      ctaBtn.onclick = () => {
-        if (project.href && project.href !== "#") {
-          window.open(project.href, "_blank");
-        }
-      };
+      // After fade-out completes, update content and fade-in
+      setTimeout(() => {
+        previewImg.src = project.image;
+        previewImg.alt = project.alt;
+        titleEl.textContent = project.title;
+        ctaBtn.textContent = project.cta;
+        ctaBtn.disabled = project.href === "#";
+
+        ctaBtn.onclick = () => {
+          if (project.href && project.href !== "#") {
+            window.open(project.href, "_blank");
+          }
+        };
+
+        // Remove fade-out, add fade-in
+        previewImg.classList.remove("fade-out");
+        titleEl.classList.remove("fade-out");
+        previewImg.classList.add("fade-in");
+        titleEl.classList.add("fade-in");
+
+        // Remove fade-in class after animation completes
+        setTimeout(() => {
+          previewImg.classList.remove("fade-in");
+          titleEl.classList.remove("fade-in");
+        }, 600);
+      }, 500);
 
       currentIndex = index;
       setActiveDot(currentIndex);

@@ -64,6 +64,28 @@ body {
   }
 }
 
+@keyframes slideInImage {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideInTitle {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .page {
   max-width: 1040px;
   margin: 24px auto 40px;
@@ -520,6 +542,18 @@ body.theme-dark .theme-toggle__icon--dark {
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
   object-fit: cover;
   background: var(--card);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.project-preview img.fade-out {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+.project-preview img.fade-in {
+  animation: slideInImage 0.6s ease forwards;
 }
 
 .project-details {
@@ -545,6 +579,18 @@ body.theme-dark .theme-toggle__icon--dark {
   font-size: 1.4rem;
   text-align: center;
   margin: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-details h3.fade-out {
+  opacity: 0;
+  transform: translateY(-15px);
+}
+
+.project-details h3.fade-in {
+  animation: slideInTitle 0.6s ease forwards;
 }
 
 .project-details__cta {
