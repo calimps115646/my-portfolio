@@ -6,7 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const projectsPrevBtn = document.querySelector("[data-projects-prev]");
   const projectDots = document.querySelectorAll("[data-project-dot]");
   const backToTopBtn = document.querySelector("[data-back-to-top]");
-  const viewMoreBtn = document.querySelector("[data-view-more]");
+  const modalEl = document.querySelector("[data-project-modal]");
+  const linkedinModalTrigger = document.querySelector("a[data-linkedin-modal]");
+  const linkedinModalCloseBtn = document.querySelector("[data-close-linkedin-modal]");
+  const modalTitle = modalEl?.querySelector("[data-modal-title]");
+  const modalStack = modalEl?.querySelector("[data-modal-stack]");
+  const modalDescription = modalEl?.querySelector("[data-modal-description]");
+  const modalMedia = modalEl?.querySelector("[data-modal-media]");
+  const modalRole = modalEl?.querySelector("[data-modal-role]");
+  const modalContributions = modalEl?.querySelector("[data-modal-contributions]");
+  const modalDeploy = modalEl?.querySelector("[data-modal-deploy]");
 
   const prefersDark =
     window.matchMedia &&
@@ -61,31 +70,57 @@ document.addEventListener("DOMContentLoaded", () => {
           "A smart system that uses AI to put students into capstone project teams. It pairs them based on technical skills, project interests, and compatibility. It finds good matches by understanding the meaning of their information and gives automatic team ideas.",
         image: "assets/images/capstoneconnect.JPG",
         alt: "CapstoneConnect landing page preview",
-        href: "#",
         cta: "View Project Details",
+        role: "Frontend Developer and UI/UX Designer",
+        stack: ["JavaScript", "CSS", "Figma"],
+        contributions: [
+          "Designed and prototyped the full user survey flow (Preferred Role, Skills, Interest, and Personality Quiz) in Figma.",
+          "Developed wireframes for the View Personality Modal and the AI Card Matches display.",
+          "Implemented the complete user survey form logic on the frontend using JavaScript.",
+          "Implemented the final UI for the View Personality Modal and AI Card Matches based on the created wireframes.",
+          "Ensured all implemented components have a responsive design for optimal viewing across devices."
+        ],
+        deployUrl: "https://capstoneconnect.netlify.app/",
       },
       {
         title: "Cartella — E-commerce Web Application",
         description:
-          "A modern e-commerce platform with product catalog, shopping cart, user authentication, and secure payment processing. Built with Spring Boot backend and responsive frontend design.",
+          "A modern e-commerce platform that connects buyers and sellers. It offers a user-friendly interface for browsing products, filtering options, and secure shopping.",
         image: "assets/images/cartella.JPG",
         alt: "Placeholder portfolio project preview",
-        href: "#",
         cta: "View Project Details",
+        role: "Frontend Developer and UI/UX Designer",
+        stack: ["ReactJS", "Figma", "MUI (Material-UI)", "Canva"],
+        contributions: [
+          "Designed and prototyped the complete, dual-sided (Vendor and Buyer) e-commerce platform flow in Figma, and created the platform logo using Canva.",
+          "Implemented the entire application frontend using ReactJS.",
+          "Utilized MUI (Material-UI) components extensively to build a consistent and modern user interface.",
+          "Developed the entire solution with a focus on responsive design, ensuring optimal viewing and functionality across all device sizes.",
+        ],
+        deployUrl: "https://cartellag5.netlify.app/",
       },
       {
         title: "FitTrack — Social Gym & Workout Logger",
         description:
-          "A reserved slot for a future project. Once the project is ready, this area will showcase its overview, goals, and key features.",
+          "FitTrack is a modern gym membership platform that allows users to log workouts, set and track fitness goals, and interact with others through social posts. Members can view workout history, post updates, and manage their fitness journey with a user-friendly interface.",
         image: "assets/images/fittrack.JPG",
         alt: "Upcoming project placeholder preview",
-        href: "#",
         cta: "View Project Details",
+        role: "Frontend Developer and UI/UX Designer",
+        stack: ["ReactJS", "CSS", "Figma", "Java"],
+        contributions: [
+          "Designed the wireframes in Figma for the View Post, Like, and Comment social features.",
+          "Implemented the entire social feature frontend (View Post, Like, Comment) using ReactJS and CSS.",
+          "Ensured the implemented social features have a fully responsive design for seamless use across all devices."
+        ],
+        videoUrl: "assets/video/fittrack.mp4",
+        videoPoster: "assets/images/fittrack.JPG"
       },
     ];
 
     let currentIndex = 0;
     let autoTimer;
+    let isModalOpen = false;
 
     const setActiveDot = (index) => {
       projectDots.forEach((dot) => {
@@ -111,12 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
         previewImg.alt = project.alt;
         titleEl.textContent = project.title;
         ctaBtn.textContent = project.cta;
-        ctaBtn.disabled = project.href === "#";
-
+        ctaBtn.disabled = false;
         ctaBtn.onclick = () => {
-          if (project.href && project.href !== "#") {
-            window.open(project.href, "_blank");
-          }
+          openProjectModal(project);
         };
 
         // Remove fade-out, add fade-in
@@ -153,6 +185,93 @@ document.addEventListener("DOMContentLoaded", () => {
       autoTimer = setInterval(nextProject, 6000);
     };
 
+    const pauseAutoTimer = () => {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+      }
+    };
+
+    const closeProjectModal = () => {
+      if (!modalEl) return;
+      modalEl.classList.remove("is-visible");
+      document.body.style.overflow = "";
+      isModalOpen = false;
+      resetAutoTimer();
+    };
+
+    const openProjectModal = (project) => {
+      if (!modalEl || !project) return;
+      pauseAutoTimer();
+      isModalOpen = true;
+
+      if (modalTitle) modalTitle.textContent = project.title;
+      if (modalDescription)
+        modalDescription.textContent = project.description;
+      if (modalRole) modalRole.textContent = project.role || "";
+
+      if (modalStack) {
+        modalStack.innerHTML = "";
+        (project.stack || []).forEach((tech) => {
+          const chip = document.createElement("span");
+          chip.className = "project-modal__stack-chip";
+          chip.textContent = tech;
+          modalStack.appendChild(chip);
+        });
+      }
+
+      if (modalContributions) {
+        modalContributions.innerHTML = "";
+        (project.contributions || []).forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          modalContributions.appendChild(li);
+        });
+      }
+
+      if (modalMedia) {
+        modalMedia.innerHTML = "";
+        const mediaWrapper = modalMedia.parentElement;
+        if (project.videoUrl) {
+          const video = document.createElement("video");
+          video.src = project.videoUrl;
+          if (project.videoPoster) {
+            video.poster = project.videoPoster;
+          }
+          video.controls = true;
+          video.playsInline = true;
+          modalMedia.appendChild(video);
+          // Mark wrapper for video centering
+          if (mediaWrapper) {
+            mediaWrapper.setAttribute("data-has-video", "true");
+          }
+        } else if (project.image) {
+          const img = document.createElement("img");
+          img.src = project.image;
+          img.alt = project.alt || project.title;
+          modalMedia.appendChild(img);
+          // Remove video marker if switching to image
+          if (mediaWrapper) {
+            mediaWrapper.removeAttribute("data-has-video");
+          }
+        }
+      }
+
+      if (modalDeploy) {
+        if (project.deployUrl) {
+          modalDeploy.style.display = "inline-flex";
+          modalDeploy.setAttribute("href", project.deployUrl);
+          modalDeploy.removeAttribute("aria-disabled");
+        } else {
+          modalDeploy.style.display = "none";
+          modalDeploy.setAttribute("aria-disabled", "true");
+        }
+      }
+
+
+      modalEl.classList.add("is-visible");
+      document.body.style.overflow = "hidden";
+    };
+
     // Initialize
     showProject(currentIndex);
     resetAutoTimer();
@@ -180,6 +299,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+
+    // Modal bindings
+    if (modalEl) {
+      const closeTriggers = modalEl.querySelectorAll("[data-close-modal]");
+      closeTriggers.forEach((el) =>
+        el.addEventListener("click", () => {
+          closeProjectModal();
+        })
+      );
+
+      // Removed backdrop click to close - only X button closes modal
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && isModalOpen) {
+          closeProjectModal();
+        }
+      });
+    }
   }
 
   // Back-to-top visibility and behavior
@@ -224,6 +361,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     updateFooterVisibility();
   }
+
+  // LinkedIn Modal functionality
+  const linkedinModal = document.querySelector(".linkedin-modal");
+  let isLinkedInModalOpen = false;
+
+  const openLinkedInModal = () => {
+    if (!linkedinModal) return;
+    linkedinModal.classList.add("is-visible");
+    document.body.style.overflow = "hidden";
+    isLinkedInModalOpen = true;
+  };
+
+  const closeLinkedInModal = () => {
+    if (!linkedinModal) return;
+    linkedinModal.classList.remove("is-visible");
+    document.body.style.overflow = "";
+    isLinkedInModalOpen = false;
+  };
+
+  if (linkedinModalTrigger) {
+    linkedinModalTrigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      openLinkedInModal();
+    });
+  }
+
+  if (linkedinModalCloseBtn) {
+    linkedinModalCloseBtn.addEventListener("click", () => {
+      closeLinkedInModal();
+    });
+  }
+
+  // Only close with X button, not backdrop click
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isLinkedInModalOpen) {
+      closeLinkedInModal();
+    }
+  });
 });
 
 
