@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r astro-portfolio/* astro-portfolio/.* .)",
+      "Bash(rm -rf astro-portfolio)",
+      "Bash(npm install:*)",
+      "Bash(npx astro:*)",
+      "Bash(rm -f index.html README.md)",
+      "Bash(rm -rf styles scripts)",
+      "Bash(mv assets/images public/)",
+      "Bash(mv assets/video public/)",
+      "Bash(rm -rf assets/icons assets)"
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+---
+---
+
+<footer id="contact" class="w-full">
+  <!-- Contact Form Section -->
+  <div class="py-16 md:py-24">
+    <div class="max-w-xl mx-auto px-4 md:px-8">
+      <h2 class="font-oswald text-3xl md:text-4xl text-center mb-3 tracking-tight">Get in Touch</h2>
+      <p class="text-sm text-neutral-500 text-center mb-10 whitespace-nowrap">
+        Have a project in mind? Let's build something amazing together.
+      </p>
+
+      <form id="contact-form" class="space-y-6" action="https://formsubmit.co/johndavid.calimpong@gmail.com" method="POST">
+        <!-- Honeypot & disable captcha -->
+        <input type="text" name="_honey" style="display:none" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://johndavid-portfolio.netlify.app/#contact" />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Name -->
+          <div>
+            <label for="name" class="block text-xs uppercase tracking-wider text-neutral-500 mb-2">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="John Doe"
+              required
+              class="w-full bg-neutral-200/50 border border-neutral-300 text-brand-black text-sm px-4 py-3 placeholder-neutral-400 focus:outline-none focus:border-neutral-500 transition-colors"
+            />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-xs uppercase tracking-wider text-neutral-500 mb-2">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="john@example.com"
+              required
+              class="w-full bg-neutral-200/50 border border-neutral-300 text-brand-black text-sm px-4 py-3 placeholder-neutral-400 focus:outline-none focus:border-neutral-500 transition-colors"
+            />
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="message" class="block text-xs uppercase tracking-wider text-neutral-500 mb-2">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Tell me about your project..."
+            required
+            class="w-full bg-neutral-200/50 border border-neutral-300 text-brand-black text-sm px-4 py-3 placeholder-neutral-400 focus:outline-none focus:border-neutral-500 transition-colors resize-none"
+          ></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="w-full bg-black text-brand-bg font-semibold text-sm uppercase tracking-wider py-4 hover:opacity-80 transition-opacity"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="max-w-6xl mx-auto px-4 md:px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-neutral-500">
+    <div class="flex items-center gap-6">
+      <span>&copy; 2025 John David</span>
+      <span class="hidden md:inline">All rights reserved</span>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="https://github.com/calimps115646" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors uppercase tracking-wider">GitHub</a>
+      <span>|</span>
+      <a href="#" onclick="event.preventDefault(); window.openLinkedInModal && window.openLinkedInModal();" class="hover:text-black transition-colors uppercase tracking-wider">LinkedIn</a>
+      <span>|</span>
+      <a href="mailto:johndavid.calimpong@gmail.com" class="hover:text-black transition-colors uppercase tracking-wider">Email</a>
+      <span>|</span>
+      <a href="https://drive.google.com/file/d/1gOuJgk-U2qMsR-nEdtOxHWzBdDydntI-/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors uppercase tracking-wider">Resume</a>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span>Built with</span>
+      <span class="font-semibold text-black">Astro + Tailwind</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button
+  id="back-to-top"
+  class="fixed right-6 bottom-6 w-10 h-10 bg-black text-brand-bg flex items-center justify-center text-xs font-mono opacity-0 pointer-events-none transition-all duration-300 hover:-translate-y-1 z-50"
+  aria-label="Back to top"
+>
+  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>
+</button>
+
+<script>
+  const backToTop = document.getElementById('back-to-top');
+  if (backToTop) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTop.classList.remove('opacity-0', 'pointer-events-none');
+        backToTop.classList.add('opacity-100', 'pointer-events-auto');
+      } else {
+        backToTop.classList.add('opacity-0', 'pointer-events-none');
+        backToTop.classList.remove('opacity-100', 'pointer-events-auto');
+      }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>
