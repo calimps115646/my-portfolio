@@ -148,13 +148,13 @@
     if (scrollY > 100 && !isCompact) {
       isCompact = true;
       navFull?.classList.add('opacity-0', 'pointer-events-none');
-      navCompact.style.transform = 'translateX(-50%) translateY(0)';
+      if (navCompact) navCompact.style.transform = 'translateX(-50%) translateY(0)';
       navCompact?.classList.remove('pointer-events-none');
       navCompact?.classList.add('pointer-events-auto');
     } else if (scrollY <= 100 && isCompact) {
       isCompact = false;
       navFull?.classList.remove('opacity-0', 'pointer-events-none');
-      navCompact.style.transform = 'translateX(-50%) translateY(-150%)';
+      if (navCompact) navCompact.style.transform = 'translateX(-50%) translateY(-150%)';
       navCompact?.classList.add('pointer-events-none');
       navCompact?.classList.remove('pointer-events-auto');
     }
