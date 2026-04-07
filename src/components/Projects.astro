@@ -1,10 +1,29 @@
 ---
 const projects = [
   {
+    title: "Skief Labs",
+    year: "2026",
+    fullDescription: "",
+    image: "",
+    role: "",
+    stack: [],
+    contributions: [],
+    placeholder: true,
+  },
+  {
+    title: "VetPulse",
+    year: "2026",
+    fullDescription: "",
+    image: "",
+    role: "",
+    stack: [],
+    contributions: [],
+    placeholder: true,
+  },
+  {
     title: "CapstoneConnect",
     subtitle: "Team Formation with AI",
-    description:
-      "A smart system that uses AI to put students into capstone project teams. It pairs them based on technical skills, project interests, and compatibility.",
+    year: "2025",
     fullDescription:
       "A smart system that uses AI to put students into capstone project teams. It pairs them based on technical skills, project interests, and compatibility. It finds good matches by understanding the meaning of their information and gives automatic team ideas.",
     image: "/images/capstoneconnect.JPG",
@@ -22,8 +41,7 @@ const projects = [
   {
     title: "Cartella",
     subtitle: "E-commerce Web Application",
-    description:
-      "A modern e-commerce platform connecting buyers and sellers with a user-friendly interface for browsing products, filtering options, and secure shopping.",
+    year: "2025",
     fullDescription:
       "A modern e-commerce platform that connects buyers and sellers. It offers a user-friendly interface for browsing products, filtering options, and secure shopping.",
     image: "/images/cartella.JPG",
@@ -38,30 +56,13 @@ const projects = [
     ],
     deployUrl: "https://cartellag5.netlify.app/",
   },
-  {
-    title: "FitTrack",
-    subtitle: "Social Gym & Workout Logger",
-    description:
-      "A modern gym membership platform that allows users to log workouts, set fitness goals, and interact with others through social posts.",
-    fullDescription:
-      "FitTrack is a modern gym membership platform that allows users to log workouts, set and track fitness goals, and interact with others through social posts. Members can view workout history, post updates, and manage their fitness journey.",
-    image: "/images/fittrack.JPG",
-    role: "Frontend Developer and UI/UX Designer",
-    stack: ["ReactJS", "CSS", "Figma", "Java"],
-    contributions: [
-      "Designed the wireframes in Figma for the View Post, Like, and Comment social features.",
-      "Implemented the entire social feature frontend using ReactJS and CSS.",
-      "Ensured the social features have fully responsive design across all devices.",
-    ],
-    videoUrl: "/video/fittrack.mp4",
-  },
 ];
 ---
 
 <section id="projects" class="w-full max-w-6xl mx-auto px-4 md:px-8 py-16 md:py-24">
   <div class="flex items-center justify-between mb-12">
     <div>
-      <span class="text-[10px] uppercase tracking-[0.3em] text-neutral-500 block mb-2">[04] Work</span>
+      <span class="text-[10px] uppercase tracking-[0.3em] text-neutral-500 block mb-2">[03] Work</span>
       <h2 class="font-oswald text-5xl md:text-7xl uppercase tracking-tight">Projects</h2>
     </div>
     <span class="text-sm text-neutral-500 hidden md:block">{projects.length} PROJECTS</span>
@@ -71,102 +72,107 @@ const projects = [
   <div class="space-y-0">
     {projects.map((project, index) => (
       <article
-        class="project-item group relative border-t border-neutral-300 py-8 md:py-10 cursor-crosshair hover:bg-black/[0.02] transition-colors px-4 -mx-4"
-        data-project-index={index}
+        class={`group relative border-t border-neutral-300 dark:border-neutral-700 py-12 md:py-16 cursor-crosshair transition-colors ${project.placeholder ? 'opacity-40' : 'project-item'}`}
+        data-project-index={project.placeholder ? undefined : index}
       >
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center relative z-10">
+        <div class={`flex items-center relative z-20 px-4 md:px-8 ${!project.placeholder ? 'group-hover:mix-blend-difference' : ''}`}>
           <!-- Number -->
-          <div class="md:col-span-1 text-neutral-400 text-sm font-mono">
-            0{index + 1}
-          </div>
+          <span class={`text-sm font-mono transition-colors duration-500 shrink-0 w-12 ${!project.placeholder ? 'text-neutral-400 group-hover:text-white/60' : 'text-neutral-400'}`}>0{index + 1}</span>
 
           <!-- Title -->
-          <div class="md:col-span-4">
-            <h3 class="font-oswald text-2xl md:text-3xl uppercase tracking-tight group-hover:italic transition-none">
-              {project.title}
-            </h3>
-            <p class="text-xs text-neutral-500 mt-1 uppercase tracking-wider">{project.subtitle}</p>
-          </div>
+          <h3 class={`font-oswald text-5xl md:text-7xl lg:text-8xl uppercase tracking-tight transition-all duration-500 flex-1 ${!project.placeholder ? 'group-hover:text-white group-hover:translate-x-4' : ''}`}>
+            {project.title}
+          </h3>
 
-          <!-- Description -->
-          <div class="md:col-span-4">
-            <p class="text-xs md:text-sm text-neutral-600 leading-relaxed">
-              {project.description}
-            </p>
-          </div>
-
-          <!-- Stack + Arrow -->
-          <div class="md:col-span-3 flex items-center justify-between">
-            <div class="flex flex-wrap gap-1.5">
-              {project.stack.slice(0, 3).map((tech) => (
-                <span class="text-[10px] uppercase border border-neutral-300 px-2 py-0.5">
-                  {tech}
-                </span>
-              ))}
-            </div>
-            <svg class="w-5 h-5 text-neutral-400 group-hover:text-black group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
+          <!-- Year + Arrow -->
+          <div class="flex items-center gap-3 shrink-0 relative z-30">
+            {project.year && (
+              <span class={`text-sm border border-neutral-400 dark:border-neutral-600 px-3 py-1 transition-colors duration-500 ${!project.placeholder ? 'group-hover:text-white group-hover:border-white/40' : ''}`}>
+                {project.year}
+              </span>
+            )}
+            {!project.placeholder && (
+              <svg class="w-5 h-5 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            )}
           </div>
         </div>
 
-        <!-- Hover image overlay - appears on top of the row, overlapping the title -->
-        <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-          <img
-            src={project.image}
-            alt={project.title}
-            class="w-[55%] max-w-md aspect-video object-cover shadow-2xl scale-90 group-hover:scale-100 transition-transform duration-500 ease-out border border-neutral-200"
-          />
-        </div>
+        {!project.placeholder && project.image && (
+          <div
+            class="hidden md:block absolute opacity-0 group-hover:opacity-100 transition-all duration-500 z-10 pointer-events-none overflow-hidden border border-neutral-300 dark:border-neutral-700"
+            style={`width: 520px; height: 260px; top: 50%; right: 15%; transform: translateY(-50%) scale(0.95) rotate(0deg); transition: opacity 0.5s, transform 0.5s;`}
+            data-hover-transform={`translateY(-50%) scale(1.05) rotate(${index % 2 === 0 ? '-3' : '3'}deg)`}
+            data-default-transform="translateY(-50%) scale(0.95) rotate(0deg)"
+          >
+            <img
+              src={project.image}
+              alt={project.title}
+              class="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700"
+            />
+          </div>
+        )}
       </article>
     ))}
     <!-- Bottom border -->
-    <div class="border-t border-neutral-300"></div>
+    <div class="border-t border-neutral-300 dark:border-neutral-700"></div>
   </div>
 </section>
 
 <!-- Project Modal -->
 <div id="project-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm opacity-0 invisible pointer-events-none">
-  <div class="modal-dialog bg-brand-bg border border-neutral-300 w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 md:p-10 relative transform translate-y-6 opacity-0">
-    <button id="modal-close" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center hover:bg-black hover:text-brand-bg transition-colors text-sm font-mono">
-      [X]
-    </button>
-
-    <div id="modal-content">
-      <span class="text-[10px] uppercase tracking-[0.3em] text-neutral-500 block mb-2" id="modal-number"></span>
-      <h3 class="font-oswald text-3xl md:text-4xl uppercase tracking-tight mb-1" id="modal-title"></h3>
-      <p class="text-xs uppercase tracking-wider text-neutral-500 mb-6" id="modal-subtitle"></p>
-
-      <div class="flex flex-wrap gap-2 mb-6" id="modal-stack"></div>
-
-      <p class="text-sm leading-relaxed text-neutral-700 mb-8" id="modal-description"></p>
-
-      <div class="mb-8 border border-neutral-200 overflow-hidden" id="modal-media"></div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="modal-dialog bg-brand-bg dark:bg-brand-black border border-neutral-300 dark:border-neutral-700 w-full max-w-3xl max-h-[90vh] overflow-y-auto relative transform translate-y-6 opacity-0">
+    <!-- Header -->
+    <div class="p-6 pb-0">
+      <div class="flex items-start justify-between">
         <div>
-          <h4 class="text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-3 border-l-2 border-black pl-3">Role</h4>
-          <p class="text-sm" id="modal-role"></p>
+          <span class="text-[10px] uppercase tracking-[0.3em] text-neutral-500 block mb-2" id="modal-number"></span>
+          <h3 class="font-oswald text-2xl md:text-3xl uppercase tracking-tight mb-1" id="modal-title"></h3>
+          <p class="text-xs uppercase tracking-wider text-neutral-500" id="modal-subtitle"></p>
         </div>
-        <div>
-          <h4 class="text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-3 border-l-2 border-black pl-3">Key Contributions</h4>
-          <ul class="text-sm space-y-2 list-disc list-inside text-neutral-700" id="modal-contributions"></ul>
-        </div>
+        <button id="modal-close" class="w-8 h-8 flex items-center justify-center hover:bg-black hover:text-brand-bg dark:hover:bg-brand-bg dark:hover:text-brand-black transition-colors text-sm font-mono shrink-0">
+          [X]
+        </button>
+      </div>
+    </div>
+
+    <div id="modal-content" class="p-6">
+      <!-- Tech Stack -->
+      <div class="flex flex-wrap gap-2 mb-4" id="modal-stack"></div>
+
+      <!-- Description -->
+      <p class="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 mb-6" id="modal-description"></p>
+
+      <!-- Media -->
+      <div class="mb-6 border border-neutral-200 dark:border-neutral-700 overflow-hidden" id="modal-media"></div>
+
+      <!-- Role -->
+      <div class="mb-6">
+        <h4 class="text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-3 border-l-2 border-black dark:border-brand-bg pl-3">Role</h4>
+        <p class="text-sm" id="modal-role"></p>
       </div>
 
-      <div class="mt-8 flex gap-4" id="modal-actions"></div>
+      <!-- Key Contributions -->
+      <div class="mb-6">
+        <h4 class="text-[10px] uppercase tracking-[0.3em] text-neutral-500 mb-3 border-l-2 border-black dark:border-brand-bg pl-3">Key Contributions</h4>
+        <ul class="text-sm space-y-2 text-neutral-700 dark:text-neutral-300" id="modal-contributions"></ul>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-center" id="modal-actions"></div>
     </div>
   </div>
 </div>
 
 <!-- LinkedIn Modal -->
 <div id="linkedin-modal" class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm opacity-0 invisible pointer-events-none">
-  <div class="modal-dialog bg-brand-bg border border-neutral-300 w-full max-w-md p-6 md:p-8 relative transform translate-y-6 opacity-0">
-    <button id="linkedin-modal-close" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center hover:bg-black hover:text-brand-bg transition-colors text-sm font-mono">
+  <div class="modal-dialog bg-brand-bg dark:bg-brand-black border border-neutral-300 dark:border-neutral-700 w-full max-w-md p-6 md:p-8 relative transform translate-y-6 opacity-0">
+    <button id="linkedin-modal-close" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center hover:bg-black hover:text-brand-bg dark:hover:bg-brand-bg dark:hover:text-brand-black transition-colors text-sm font-mono">
       [X]
     </button>
     <h3 class="font-oswald text-2xl uppercase tracking-tight mb-4">LinkedIn Account</h3>
-    <p class="text-sm leading-relaxed text-neutral-700">
+    <p class="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
       My LinkedIn account is currently restricted and requires a valid ID verification.
       I'm currently processing the verification, and it will be available soon.
       Thank you for your understanding!
@@ -194,7 +200,7 @@ const projects = [
     stackEl.innerHTML = '';
     project.stack.forEach(tech => {
       const span = document.createElement('span');
-      span.className = 'text-[10px] uppercase border border-neutral-300 px-3 py-1';
+      span.className = 'text-[10px] uppercase border border-neutral-300 dark:border-neutral-600 px-3 py-1';
       span.textContent = tech;
       stackEl.appendChild(span);
     });
@@ -203,7 +209,8 @@ const projects = [
     contribEl.innerHTML = '';
     project.contributions.forEach(item => {
       const li = document.createElement('li');
-      li.textContent = item;
+      li.className = 'flex gap-2';
+      li.innerHTML = `<span class="shrink-0">•</span><span>${item}</span>`;
       contribEl.appendChild(li);
     });
 
@@ -221,7 +228,7 @@ const projects = [
       const img = document.createElement('img');
       img.src = project.image;
       img.alt = project.title;
-      img.className = 'w-full aspect-video object-cover';
+      img.className = 'w-full aspect-video object-contain';
       mediaEl.appendChild(img);
     }
 
@@ -232,7 +239,7 @@ const projects = [
       a.href = project.deployUrl;
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
-      a.className = 'inline-flex items-center gap-2 px-6 py-3 bg-black text-brand-bg text-xs uppercase tracking-wider font-medium hover:opacity-80 transition-opacity';
+      a.className = 'inline-flex items-center gap-2 px-6 py-3 bg-black dark:bg-brand-bg text-brand-bg dark:text-brand-black text-xs uppercase tracking-wider font-medium hover:opacity-80 transition-opacity';
       a.textContent = 'View Live Project';
       actionsEl.appendChild(a);
     }
@@ -261,12 +268,6 @@ const projects = [
   });
 
   modalClose?.addEventListener('click', closeModal);
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
 
   // LinkedIn modal
   const linkedinModal = document.getElementById('linkedin-modal');
@@ -292,10 +293,20 @@ const projects = [
   }
 
   linkedinClose?.addEventListener('click', closeLinkedInModal);
-  linkedinModal?.addEventListener('click', (e) => {
-    if (e.target === linkedinModal) closeLinkedInModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLinkedInModal();
+
+  // Project image hover transforms
+  document.querySelectorAll('.project-item').forEach(item => {
+    const imgContainer = item.querySelector('[data-hover-transform]');
+    if (!imgContainer) return;
+
+    const hoverTransform = imgContainer.getAttribute('data-hover-transform');
+    const defaultTransform = imgContainer.getAttribute('data-default-transform');
+
+    item.addEventListener('mouseenter', () => {
+      imgContainer.style.transform = hoverTransform;
+    });
+    item.addEventListener('mouseleave', () => {
+      imgContainer.style.transform = defaultTransform;
+    });
   });
 </script>

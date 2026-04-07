@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-oswald: 'Oswald', sans-serif;
   --font-mono: 'Space Mono', monospace;
@@ -23,6 +25,10 @@ html {
   background: #000;
   color: #E6E4DD;
 }
+.dark ::selection {
+  background: #E6E4DD;
+  color: #000;
+}
 
 /* Scrollbar */
 ::-webkit-scrollbar {
@@ -33,6 +39,12 @@ html {
 }
 ::-webkit-scrollbar-thumb {
   background: #000;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #E6E4DD;
 }
 
 /* Stretched text */
